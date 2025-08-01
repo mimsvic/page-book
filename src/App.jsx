@@ -14,13 +14,18 @@ export default function App() {
     const element = document.getElementById(id);
     if (element) {
       const headerHeight = document.querySelector('header')?.offsetHeight || 0;
-      const extraOffset = id === 'Historia' ? -60 : 10; 
+      const extraOffset = id === 'historia' ? -60 : 10;
 
-      const offset = element.offsetTop - (window.innerHeight / 2) + (element.offsetHeight / 2) - headerHeight / 2 + extraOffset;
+      const offset =
+        element.offsetTop -
+        window.innerHeight / 2 +
+        element.offsetHeight / 2 -
+        headerHeight / 2 +
+        extraOffset;
 
       window.scrollTo({ top: offset, behavior: 'smooth' });
     } else {
-      // "      console.warn(`Elemento com o ID "${id}" não encontrado.`);"
+      // console.warn(`Elemento com o ID "${id}" não encontrado.`);
     }
   };
 
@@ -33,25 +38,20 @@ export default function App() {
       {/* Cabeçalho */}
       <header className="w-full py-4 fixed top-0 left-0 bg-white dark:bg-black z-50 shadow-none">
         <div className="max-w-7xl mx-auto flex items-center justify-between px-6">
-          <img
-            src={theme === 'dark' ? '/qhunt.png' : '/qhunt.png'}
-            alt="Logo"
-            className="h-12"
-          />
           <nav className="hidden md:flex space-x-6">
             <a
               href="#historia"
-              className="hover:text-green-600"
+              className="hover:text-[#9faad1]"
               onClick={(e) => {
                 e.preventDefault();
                 scrollToSection('historia');
               }}
             >
-              História 
+              História
             </a>
             <a
               href="#time"
-              className="hover:text-green-600"
+              className="hover:text-[#d7cb8b]"
               onClick={(e) => {
                 e.preventDefault();
                 scrollToSection('time');
@@ -59,7 +59,6 @@ export default function App() {
             >
               Time
             </a>
-
           </nav>
           <button type="button" onClick={toggleTheme} className="scale-x-100 dark:-scale-x-100">
             <RxSwitch className="h-8 w-8" />
@@ -68,35 +67,20 @@ export default function App() {
       </header>
 
       {/* Hero Section */}
-      <div className="flex flex-col md:flex-row items-center justify-start h-auto md:h-screen max-w-7xl mx-auto px-8 pt-20 md:pt-0 md:px-8 md:pt-10">
+      <div className="flex flex-col md:flex-row items-center justify-start h-auto md:h-screen max-w-7xl mx-auto px-8 pt-20 md:pt-10">
         <div className="w-full md:w-1/2 text-center md:text-left">
           <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold leading-snug mb-6 text-center md:text-left">
-          Intuitivo na jogabilidade, pesado na qualidade.
+            A Hora da Estrela – Clarice Lispector e o Silêncio das Vidas Invisíveis
           </h1>
 
           <p className="mt-6 text-lg md:text-2xl mb-8">
-            Conheça o  <span className="text-green-600 font-semibold">QHUNT</span> e tenha sempre a{' '}
-            <span className="text-yellow-500 font-semibold">qualidade</span> que você precisa.
-          </p>
-          <div className="flex flex-col items-center space-y-4">
-          <div className="flex space-x-6">
-            <img
-              src="/dona.png"
-              alt="Personagem Dona"
-              className="w-24 h-auto object-contain"
-            />
-            <img
-              src="/croda.png"
-              alt="Personagem Croda"
-              className="w-20 h-auto object-contain"
-            />
-          </div>
-          <p className="text-center text-lg font-semibold text-gray-900 dark:text-white">
-            Personagens intuitivos e criativos
+            Uma jornada literária{' '}
+            <span className="text-[#d7cb8b] font-semibold">pela dor,</span>{' '}
+            <span className="text-[#9faad1] font-semibold">identidade</span> e{' '}
+            <span className="text-[#b0867e] font-semibold">invisibilidade de Macabéa</span>
           </p>
         </div>
 
-         </div>
         <div className="flex md:hidden w-full justify-center mt-8">
           <img
             src="/qhuntpc.png"
@@ -107,65 +91,48 @@ export default function App() {
 
         <div className="hidden md:flex w-full md:w-1/2 justify-end items-center ml-10">
           <img
-            src="/qhuntpc.png"
+            src="/livro.png"
             alt="Laptop Mockup"
-            className="w-[110%] md:scale-150 object-contain"
+            className="w-[50%] md:scale-150 object-contain"
           />
         </div>
-        
-
       </div>
-     
 
-      {/* Seção Funcionalidades - Sempre visível */}
-      <div
+      {/* Seção História */}
+      <section
         id="historia"
         className="flex flex-col items-center bg-white dark:bg-black py-12 mb-16"
       >
         <h2 className="text-4xl md:text-5xl font-bold mb-6 text-center sm:text-3xl">
-          História QHUNT
+          Descrição
         </h2>
-
         <p className="text-lg text-gray-600 dark:text-gray-300 text-center max-w-2xl mb-12">
-          
+          "A Hora da Estrela", obra-prima de Clarice Lispector, é mais do que um romance - é uma
+          reflexão crua e poética sobre a existência. Neste site, exploramos os múltiplos sentidos da
+          obra, o universo de sua protagonista Macabéa, e a complexa relação entre narrador e
+          personagem. Da análise literária ao contexto histórico, este espaço é dedicado a todos que
+          desejam mergulhar na essência desse clássico da literatura brasileira.
         </p>
         <div className="max-w-6xl mx-auto px-4">
-        <div className="flex flex-col lg:flex-row items-center lg:items-start gap-8 lg:gap-12">
-          {/* Imagem Otimizada */}
-          <div className="flex-1 w-full lg:w-1/2">
-            <img
-              src="/videogame3.png"
-              alt="Ilustração do Jogo QHunt"
-              className="w-full max-w-md mx-auto lg:max-w-full rounded-lg object-contain"
-            />
-          </div>
-
-          {/* Parágrafo Otimizado */}
-          <div className="flex-1 w-full lg:w-1/2">
-            <p className="text-lg text-gray-800 dark:text-gray-200 text-left">
-              No primeiro semestre, durante o Desafio da Qualidade, desenvolvemos o QHunt e o entregamos em apenas um mês. Todos os personagens e itens foram criados manualmente, junto com uma trilha sonora original, resultando em um jogo único, criativo e imersivo.
-            </p>
+          <div className="flex flex-col lg:flex-row items-center lg:items-center gap-8 lg:gap-12">
             <div className="flex-1 w-full lg:w-1/2">
-            <img
-              src="/controle.png"
-              alt="Ilustração do Jogo QHunt"
-              className="w-[50%] max-w-md mx-auto lg:max-w-full rounded-lg object-contain"
-            />
-          </div>
-
+              <img
+                src="/fundo.png"
+                className="max-w-md lg:max-w-sm mx-auto rounded-lg object-contain"
+                alt="Imagem fundo"
+              />
+            </div>
           </div>
         </div>
-      </div>
-      </div>
+      </section>
+
       {/* Seção Time */}
-      <div
+      <section
         id="time"
         className="flex flex-col items-center justify-center py-8 mt-4"
       >
         <h3 className="text-5xl font-bold mb-4">Time</h3>
-        <p className="text-xl text-gray-600 dark:text-gray-300 text-center max-w-3xl mb-8">
-
-        </p>
+        <p className="text-xl text-gray-600 dark:text-gray-300 text-center max-w-3xl mb-8"></p>
         <div className="w-full flex justify-center">
           <img
             src="/time.png"
@@ -173,15 +140,14 @@ export default function App() {
             className="w-full max-w-3xl h-auto object-contain rounded-lg"
           />
         </div>
-      </div>
+      </section>
 
-      {/* Footer Section */}
+      {/* Barra colorida */}
       <div className="w-full flex" style={{ height: '5px' }}>
         <div className="flex-1 bg-[#22b2ab]" />
         <div className="flex-1 bg-yellow-500" />
         <div className="flex-1 bg-[#18837e]" />
       </div>
-
     </div>
   );
 }
