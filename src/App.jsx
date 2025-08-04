@@ -164,7 +164,7 @@ export default function App() {
       {/* Seção Comprar */}
       <section
         id="duda"
-        className="flex flex-col items-center justify-center py-16 px-4 mt-4 bg-white dark:bg-gray-900"
+        className="flex flex-col items-center justify-center py-16 px-4 mt-4 bg-white dark:bg-black"
       >
         <h3 className="text-5xl font-bold mb-6 text-center">Comprar o Livro</h3>
         <div className="w-full max-w-4xl bg-white dark:bg-black rounded-xl shadow-lg overflow-hidden flex flex-col md:flex-row items-center border dark:border-gray-700">
@@ -176,7 +176,7 @@ export default function App() {
             />
           </div>
           <div className="w-full md:w-1/2 p-6">
-            <h4 className="text-2xl font-bold mb-3 text-gray-900 dark:text-white">
+            <h4 className="text-2xl font-bold mb-3 text-black dark:text-white">
               A Hora da Estrela
             </h4>
             <p className="text-gray-700 dark:text-gray-300 mb-4">
@@ -198,7 +198,7 @@ export default function App() {
       {/* Seção Review */}
       <section
         id="review"
-        className="flex flex-col items-center justify-center py-16 px-4 mt-4 bg-white dark:bg-gray-900"
+        className="flex flex-col items-center justify-center py-16 px-4 mt-4 bg-white dark:bg-black"
       >
         <h3 className="text-5xl font-bold mb-6 text-center">Review</h3>
         <div className="w-full max-w-4xl bg-white dark:bg-black rounded-xl  overflow-hidden flex flex-col md:flex-row items-center">
@@ -210,7 +210,7 @@ export default function App() {
             />
           </div>
           <div className="w-full md:w-1/2 p-6">
-            <h4 className="text-2xl font-bold mb-3 text-gray-900 dark:text-white">
+            <h4 className="text-2xl font-bold mb-3 text-black dark:text-white">
               Duda Perez
             </h4>
             <p className="text-gray-700 dark:text-gray-300 mb-4">
