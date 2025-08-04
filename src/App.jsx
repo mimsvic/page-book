@@ -1,14 +1,41 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { RxSwitch } from 'react-icons/rx';
 import { useTheme } from './contexts/ContextProvider';
 
 export default function App() {
   const { theme, setTheme } = useTheme();
+  const [activeSection, setActiveSection] = useState('');
 
   useEffect(() => {
     document.documentElement.classList.toggle('dark', theme === 'dark');
     localStorage.setItem('theme', theme);
   }, [theme]);
+
+  // Scrollspy: atualiza a aba ativa conforme o scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = ['historia', 'duda', 'review'];
+      let current = '';
+
+      sections.forEach((id) => {
+        const section = document.getElementById(id);
+        if (section) {
+          const rect = section.getBoundingClientRect();
+          // Se o centro da tela está dentro da seção, marque ela como ativa
+          if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
+            current = id;
+          }
+        }
+      });
+
+      setActiveSection(current);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // chama ao montar
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
@@ -24,8 +51,6 @@ export default function App() {
         extraOffset;
 
       window.scrollTo({ top: offset, behavior: 'smooth' });
-    } else {
-      // console.warn(`Elemento com o ID "${id}" não encontrado.`);
     }
   };
 
@@ -41,7 +66,7 @@ export default function App() {
           <nav className="hidden md:flex space-x-6">
             <a
               href="#historia"
-              className="hover:text-[#9faad1]"
+              className={`hover:text-[#9faad1] ${activeSection === 'historia' ? 'text-[#9faad1] font-semibold' : ''}`}
               onClick={(e) => {
                 e.preventDefault();
                 scrollToSection('historia');
@@ -50,14 +75,24 @@ export default function App() {
               História
             </a>
             <a
-              href="#time"
-              className="hover:text-[#d7cb8b]"
+              href="#duda"
+              className={`hover:text-[#d7cb8b] ${activeSection === 'duda' ? 'text-[#d7cb8b] font-semibold' : ''}`}
               onClick={(e) => {
                 e.preventDefault();
-                scrollToSection('time');
+                scrollToSection('duda');
               }}
             >
-              Time
+              Comprar
+            </a>
+            <a
+              href="#review"
+              className={`hover:text-[#b0867e] ${activeSection === 'review' ? 'text-[#b0867e] font-semibold' : ''}`}
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToSection('review');
+              }}
+            >
+              Review
             </a>
           </nav>
           <button type="button" onClick={toggleTheme} className="scale-x-100 dark:-scale-x-100">
@@ -83,7 +118,7 @@ export default function App() {
 
         <div className="flex md:hidden w-full justify-center mt-8">
           <img
-            src="/qhuntpc.png"
+            src="/livro.png"
             alt="Mobile Mockup"
             className="w-[110%] max-w-xs object-contain"
           />
@@ -126,28 +161,64 @@ export default function App() {
         </div>
       </section>
 
-      {/* Seção Time */}
+      {/* Seção Comprar */}
       <section
-        id="time"
-        className="flex flex-col items-center justify-center py-8 mt-4"
+        id="duda"
+        className="flex flex-col items-center justify-center py-16 px-4 mt-4 bg-white dark:bg-gray-900"
       >
-        <h3 className="text-5xl font-bold mb-4">Time</h3>
-        <p className="text-xl text-gray-600 dark:text-gray-300 text-center max-w-3xl mb-8"></p>
-        <div className="w-full flex justify-center">
-          <img
-            src="/time.png"
-            alt="Time"
-            className="w-full max-w-3xl h-auto object-contain rounded-lg"
-          />
+        <h3 className="text-5xl font-bold mb-6 text-center">Comprar o Livro</h3>
+        <div className="w-full max-w-4xl bg-white dark:bg-black rounded-xl shadow-lg overflow-hidden flex flex-col md:flex-row items-center border dark:border-gray-700">
+          <div className="w-full md:w-1/2">
+            <img
+              src="/livro2.png"
+              alt="Capa do Livro A Hora da Estrela"
+              className="w-full h-full object-cover"
+            />
+          </div>
+          <div className="w-full md:w-1/2 p-6">
+            <h4 className="text-2xl font-bold mb-3 text-gray-900 dark:text-white">
+              A Hora da Estrela
+            </h4>
+            <p className="text-gray-700 dark:text-gray-300 mb-4">
+              Uma obra-prima de Clarice Lispector que mergulha na alma de Macabéa, uma jovem nordestina em busca de identidade e sentido em meio à invisibilidade social.
+            </p>
+            <p className="text-xl font-semibold text-[#d7cb8b] mb-6">R$ 34,90</p>
+            <a
+              href="https://www.amazon.com.br/dp/B076MZ1KZL" // troque pela URL de venda real
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block bg-[#9faad1] hover:bg-[#8a97c2] text-white font-semibold py-2 px-6 rounded-lg transition duration-300"
+            >
+              Comprar agora
+            </a>
+          </div>
         </div>
       </section>
 
-      {/* Barra colorida */}
-      <div className="w-full flex" style={{ height: '5px' }}>
-        <div className="flex-1 bg-[#22b2ab]" />
-        <div className="flex-1 bg-yellow-500" />
-        <div className="flex-1 bg-[#18837e]" />
-      </div>
+      {/* Seção Review */}
+      <section
+        id="review"
+        className="flex flex-col items-center justify-center py-16 px-4 mt-4 bg-white dark:bg-gray-900"
+      >
+        <h3 className="text-5xl font-bold mb-6 text-center">Review</h3>
+        <div className="w-full max-w-4xl bg-white dark:bg-black rounded-xl  overflow-hidden flex flex-col md:flex-row items-center">
+          <div className="w-full md:w-1/2">
+            <img
+              src="/duda.png"
+              alt="Foto da Duda"
+              className="w-full h-full object-cover"
+            />
+          </div>
+          <div className="w-full md:w-1/2 p-6">
+            <h4 className="text-2xl font-bold mb-3 text-gray-900 dark:text-white">
+              Duda Perez
+            </h4>
+            <p className="text-gray-700 dark:text-gray-300 mb-4">
+              Duda é o tipo de pessoa que carrega a literatura no olhar. Entre tantas histórias, foi <em>A Hora da Estrela</em> que conquistou seu coração de forma definitiva. Ela se emociona com a trajetória de Macabéa, se conecta com sua solidão silenciosa e encontra beleza nas entrelinhas que Clarice escreve com tanta sensibilidade. Para Duda, esse livro não é só uma leitura — é uma experiência profunda que reverbera na alma.
+            </p>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
